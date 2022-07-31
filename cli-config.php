@@ -11,14 +11,11 @@
  * @see https://www.slimframework.com/docs/v3/cookbook/database-doctrine.html
  */
 
-
-use DI\ContainerBuilder;
-use Doctrine\ORM\EntityManagerInterface;
-use Slim\Factory\AppFactory;
+use App\Application\Settings\SettingsInterface;
 
 require __DIR__ . '/vendor/autoload.php';
 
-$containerBuilder = new ContainerBuilder();
+$containerBuilder = new DI\ContainerBuilder();
 
 $settings = require __DIR__ . '/app/settings.php';
 $settings($containerBuilder);
@@ -31,9 +28,16 @@ $repositories($containerBuilder);
 
 $container = $containerBuilder->build();
 
-AppFactory::setContainer($container);
-$app = AppFactory::create();
+Slim\Factory\AppFactory::setContainer($container);
+$app = Slim\Factory\AppFactory::create();
 
-$em = $app->getContainer()->get(EntityManagerInterface::class);
+$em = $app->getContainer()->get(Doctrine\ORM\EntityManagerInterface::class);
 
-return \Doctrine\ORM\Tools\Console\ConsoleRunner::createHelperSet($em);
+// run php vendor/bin/doctrine command
+//return Doctrine\ORM\Tools\Console\ConsoleRunner::createHelperSet($em);
+
+// run php vendor/bin/doctrine-migrations command
+return Doctrine\Migrations\DependencyFactory::fromEntityManager(
+	new Doctrine\Migrations\Configuration\Migration\PhpFile(__DIR__ . '/app/migrations.php'),
+	new Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager($em)
+);

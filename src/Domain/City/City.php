@@ -6,9 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Domain\City\CityRepository;
 
 /**
- * @ORM\Entity(repositoryClass="CityRepository", readOnly=true)
+ * @ORM\Entity(repositoryClass="CityRepository")
+ * @ORM\Table(name="cities")
  */
-class City
+final class City
 {
     /**
      * @ORM\Id

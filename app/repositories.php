@@ -1,19 +1,17 @@
 <?php
 declare(strict_types=1);
 
-use App\Domain\City\City;
-use App\Domain\City\CityRepository;
-use App\Domain\StickerCode\StickerCode;
-use App\Domain\StickerCode\StickerCodeRepository;
-use DI\ContainerBuilder;
-
-return function (ContainerBuilder $containerBuilder) {
+return function (DI\ContainerBuilder $containerBuilder) {
     $containerBuilder->addDefinitions([
-        StickerCodeRepository::class => function () {
-            return new StickerCodeRepository($em = em(), $em->getClassMetadata(StickerCode::class));
+		App\Domain\StickerCode\StickerCodeRepository::class => function () {
+            return new App\Domain\StickerCode\StickerCodeRepository(
+            	$em = em(),
+				$em->getClassMetadata(App\Domain\StickerCode\StickerCode::class));
         },
-        CityRepository::class => function () {
-            return new CityRepository($em = em(), $em->getClassMetadata(City::class));
+		App\Domain\City\CityRepository::class => function () {
+            return new App\Domain\City\CityRepository(
+            	$em = em(),
+				$em->getClassMetadata(App\Domain\City\City::class));
         }
     ]);
 };

@@ -23,15 +23,19 @@ return function (ContainerBuilder $containerBuilder) {
                 'doctrine' => [
                     'dev_mode' => true,
                     'cache_dir' => APP_ROOT . '/var/doctrine',
-                    'metadata_dirs' => [APP_ROOT . '/src/Domain/Entity'],
+                    'metadata_dirs' => [
+//						dirname(__DIR__) . '/src/Domain/StickerCode/StickerCode.php',
+//						dirname(__DIR__) . '/src/Domain/City/City.php',
+						dirname(__DIR__) . '/src/Domain',
+					],
                     'connection' => [
                         'driver' => 'pdo_mysql',
                         'host' => '127.0.0.1',
-                        'port' => '13306',
+                        'port' => '3306',
                         'dbname' => 'promo_mobil',
                         'user' => 'root',
                         'password' => '',
-                    ]
+                    ],
                 ]
             ]);
         }
