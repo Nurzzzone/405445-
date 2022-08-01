@@ -14,7 +14,10 @@ class ActionPayload implements JsonSerializable
      */
     private $data;
 
-    private ?ActionError $error;
+    /**
+     * @var ActionError|null
+     */
+    private $error;
 
     public function __construct(
         int $statusCode = 200,

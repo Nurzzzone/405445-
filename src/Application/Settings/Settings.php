@@ -5,7 +5,10 @@ namespace App\Application\Settings;
 
 class Settings implements SettingsInterface
 {
-    private array $settings;
+    /**
+     * @var array
+     */
+    private $settings;
 
     public function __construct(array $settings)
     {

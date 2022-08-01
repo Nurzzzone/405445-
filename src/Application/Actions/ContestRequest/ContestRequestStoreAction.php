@@ -71,6 +71,14 @@ class ContestRequestStoreAction extends Action
 
         $this->contestRequestRepository->insertContestRequest($requestBody);
 
+        $this->logger->info(
+            sprintf(
+                '%s registered new sticker code %s',
+                $requestBody['phone_number'],
+                $requestBody['sticker_code']
+            )
+        );
+
         return $this->respondWithData(['message' => 'success']);
     }
 }
