@@ -16,7 +16,7 @@ return function (ContainerBuilder $containerBuilder) {
                 'logError'            => false,
                 'logErrorDetails'     => false,
                 'logger' => [
-                    'name' => 'slim-app',
+                    'name' => 'promo_mobil',
                     'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/app.log',
                     'level' => Logger::DEBUG,
                 ],
@@ -24,17 +24,17 @@ return function (ContainerBuilder $containerBuilder) {
                     'dev_mode' => true,
                     'cache_dir' => APP_ROOT . '/var/doctrine',
                     'metadata_dirs' => [
-//						dirname(__DIR__) . '/src/Domain/StickerCode/StickerCode.php',
-//						dirname(__DIR__) . '/src/Domain/City/City.php',
-						dirname(__DIR__) . '/src/Domain',
-					],
+//                      dirname(__DIR__) . '/src/Domain/StickerCode/StickerCode.php',
+//                      dirname(__DIR__) . '/src/Domain/City/City.php',
+                        dirname(__DIR__) . '/src/Domain',
+                    ],
                     'connection' => [
                         'driver' => 'pdo_mysql',
-                        'host' => '127.0.0.1',
+                        'host' => '89.218.12.150',
                         'port' => '3306',
                         'dbname' => 'promo_mobil',
                         'user' => 'root',
-                        'password' => '',
+                        'password' => '1XGBxTKm2IYHWDMeOKiX',
                     ],
                 ]
             ]);

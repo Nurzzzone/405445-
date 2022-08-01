@@ -47,6 +47,8 @@ return function (ContainerBuilder $containerBuilder) {
                new \Symfony\Component\Cache\Adapter\FilesystemAdapter('', 0, $doctrineSettings['cache_dir'])
            );
 
+           $config->setNamingStrategy(new \Doctrine\ORM\Mapping\UnderscoreNamingStrategy());
+
            return \Doctrine\ORM\EntityManager::create($doctrineSettings['connection'], $config);
        }
     ]);

@@ -3,7 +3,6 @@
 namespace App\Domain\City;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Domain\City\CityRepository;
 
 /**
  * @ORM\Entity(repositoryClass="CityRepository")

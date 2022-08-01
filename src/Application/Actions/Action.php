@@ -4,21 +4,37 @@ declare(strict_types=1);
 namespace App\Application\Actions;
 
 use App\Domain\DomainException\DomainRecordNotFoundException;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Log\LoggerInterface;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpNotFoundException;
+use Slim\Factory\AppFactory;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 abstract class Action
 {
-    protected LoggerInterface $logger;
+    /**
+     * @var LoggerInterface
+     */
+    protected $logger;
 
-    protected Request $request;
+    /**
+     * @var Request
+     */
+    protected $request;
 
-    protected Response $response;
+    /**
+     * @var Response
+     */
+    protected $response;
 
-    protected array $args;
+    /**
+     * @var array
+     */
+    protected $args;
 
     public function __construct(LoggerInterface $logger)
     {
@@ -87,5 +103,12 @@ abstract class Action
         return $this->response
                     ->withHeader('Content-Type', 'application/json')
                     ->withStatus($payload->getStatusCode());
+    }
+
+    protected function getEntityManager(): EntityManager
+    {
+        return AppFactory::create()
+            ->getContainer()
+            ->get(EntityManagerInterface::class);
     }
 }

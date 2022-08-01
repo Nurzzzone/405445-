@@ -9,17 +9,19 @@ use Psr\Log\LoggerInterface;
 
 class CityListAction extends Action
 {
-	private CityRepository $repository;
+    private CityRepository $repository;
 
-	public function __construct(LoggerInterface $logger, CityRepository $repository)
-	{
-		parent::__construct($logger);
-
-		$this->repository = $repository;
-	}
-
-	protected function action(): Response
+    public function __construct(LoggerInterface $logger, CityRepository $repository)
     {
+        parent::__construct($logger);
+
+        $this->repository = $repository;
+    }
+
+    protected function action(): Response
+    {
+        $this->logger->info('City list was viewed');
+
         return $this->respondWithData($this->repository->findAll());
     }
 }

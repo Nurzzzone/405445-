@@ -11,8 +11,6 @@
  * @see https://www.slimframework.com/docs/v3/cookbook/database-doctrine.html
  */
 
-use App\Application\Settings\SettingsInterface;
-
 require __DIR__ . '/vendor/autoload.php';
 
 $containerBuilder = new DI\ContainerBuilder();
@@ -38,6 +36,6 @@ $em = $app->getContainer()->get(Doctrine\ORM\EntityManagerInterface::class);
 
 // run php vendor/bin/doctrine-migrations command
 return Doctrine\Migrations\DependencyFactory::fromEntityManager(
-	new Doctrine\Migrations\Configuration\Migration\PhpFile(__DIR__ . '/app/migrations.php'),
-	new Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager($em)
+    new Doctrine\Migrations\Configuration\Migration\PhpFile(__DIR__ . '/app/migrations.php'),
+    new Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager($em)
 );
